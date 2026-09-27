@@ -1,0 +1,20 @@
+{
+  "name": "dynamic-service-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "seed:products": "node seed-products.js",
+    "db:check": "node -e \"import('./src/db.js').then(async({pool})=>{await pool.query('SELECT 1');console.log('PostgreSQL connection OK');await pool.end()}).catch(e=>{console.error(e.message);process.exit(1)})\""
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1"
+  }
+}

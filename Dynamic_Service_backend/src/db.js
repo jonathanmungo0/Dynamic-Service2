@@ -1,0 +1,18 @@
+import pg from 'pg';
+import dotenv from 'dotenv';
+
+dotenv.config();
+const { Pool } = pg;
+
+if (!process.env.DATABASE_URL) {
+  console.error('DATABASE_URL is missing. Create backend/.env from .env.example.');
+}
+
+export const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  max: 10,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 5000
+});
+
+pool.on('error', (err) => console.error('Unexpected PostgreSQL pool error:', err.message));
